@@ -1,7 +1,5 @@
 package Server;
 
-import Server.ChatServer;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,6 +12,7 @@ public class UserOnServer extends Thread {
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
+    private String usreName;
 
     public UserOnServer(Socket socket) {
         this.socket = socket;
@@ -27,13 +26,16 @@ public class UserOnServer extends Thread {
             out = new PrintWriter(socket.getOutputStream(), true);
             ChatServer.writers.add(out);
 
+            out.println("Tell Me Your Name");
+            usreName=in.readLine();
+
             while (true) {
                 String input = in.readLine();
                 if (input == null) {
                     return;
                 }
                 for (PrintWriter writer : ChatServer.writers) {
-                    writer.println(input);
+                    writer.println(usreName+": "+ input);
                 }
             }
         } catch (IOException e) {
