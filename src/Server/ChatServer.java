@@ -7,6 +7,7 @@ import java.util.HashSet;
 public class ChatServer {
 
     public static HashSet<PrintWriter> writers = new HashSet<>();
+    public static HashSet<String> onlineUsers = new HashSet<>();
 
     public static void main(String[] args) throws Exception {
         System.out.println("The chat server is running.");

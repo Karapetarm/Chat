@@ -8,6 +8,7 @@ public class ClientOut implements Runnable {
     public void run() {
         try {
             while (true) {
+
                 client.getSocketOut().println(client.getUserIn().readLine());
             }
         } catch (IOException e) {

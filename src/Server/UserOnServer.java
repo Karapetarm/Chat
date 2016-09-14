@@ -29,6 +29,10 @@ public class UserOnServer extends Thread {
             out.println("Tell Me Your Name");
             usreName=in.readLine();
 
+            System.out.println(ChatServer.onlineUsers);
+            ChatServer.onlineUsers.add(usreName);
+
+
             while (true) {
                 String input = in.readLine();
                 if (input == null) {
@@ -41,6 +45,14 @@ public class UserOnServer extends Thread {
         } catch (IOException e) {
             System.out.println(e);
         } finally {
+
+            if (usreName != null) {
+                ChatServer.onlineUsers.remove(usreName);
+                for (PrintWriter writer : ChatServer.writers) {
+                    writer.println(usreName +": is offline");
+                }
+            }
+            
             if (out != null) {
                 ChatServer.writers.remove(out);
             }
@@ -50,7 +62,6 @@ public class UserOnServer extends Thread {
             } catch (IOException e) {
             }
         }
-
 
     }
 

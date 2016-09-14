@@ -8,10 +8,8 @@ public class ClientIn implements Runnable {
     public void run() {
         try {
             while (true) {
-                String line = client.getSocketIn().readLine();
 
-                    System.out.println(line);
-
+                    System.out.println(client.getSocketIn().readLine());
             }
         }catch (IOException e){
 
