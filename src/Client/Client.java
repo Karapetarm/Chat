@@ -63,6 +63,9 @@ public class Client {
         return socketOut;
     }
 
+
+
+
     public static void main(String [] args){
 
         ClientIn clientIn=new ClientIn();
