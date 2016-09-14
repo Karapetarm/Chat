@@ -41,6 +41,10 @@ public class UserOnServer extends Thread {
         } catch (IOException e) {
             System.out.println(e);
         } finally {
+            if (out != null) {
+                ChatServer.writers.remove(out);
+            }
+
             try {
                 socket.close();
             } catch (IOException e) {

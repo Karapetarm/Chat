@@ -1,5 +1,7 @@
 package Client;
 
+import java.io.IOException;
+
 public class ClientIn implements Runnable {
     Client client=Client.getInstance();
     @Override
@@ -7,11 +9,11 @@ public class ClientIn implements Runnable {
         try {
             while (true) {
                 String line = client.getSocketIn().readLine();
-               // if (line != null) {
+
                     System.out.println(line);
-                //}
+
             }
-        }catch (Exception e){
+        }catch (IOException e){
 
         }
     }
