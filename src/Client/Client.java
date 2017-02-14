@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Client {
 
@@ -63,17 +68,28 @@ public class Client {
         return socketOut;
     }
 
+    public static void main(String[] args) {
+        Client client = Client.getInstance();
+        new Thread(()-> {
+            try {
+                    while (true) {
 
+                        System.out.println(client.getSocketIn().readLine());
+                    }
+                } catch (IOException e) {
 
+                }
+        },"name").start();
 
-    public static void main(String [] args){
+        new Thread(() -> {
+            try {
+                while (true) {
 
-        ClientIn clientIn=new ClientIn();
-        Thread threadClientIn = new Thread(clientIn);
-        threadClientIn.start();
+                    client.getSocketOut().println(client.getUserIn().readLine());
+                }
+            } catch (IOException e) {
 
-        ClientOut clientOut =new ClientOut();
-        Thread threadClientOut=new Thread(clientOut);
-        threadClientOut.start();
+            }
+        }).start();
     }
 }

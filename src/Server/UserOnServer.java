@@ -25,26 +25,23 @@ public class UserOnServer extends Thread {
 
             out = new PrintWriter(socket.getOutputStream(), true);
 
-            //userInitialization();
-            out.println("Tell As Your Name");
-            userName = in.readLine();
-
-            for (PrintWriter writer : ChatServer.writers) {
-                if(writer!=null){
-                    writer.println(userName + ": is online ");
-                }
-            }
-            ChatServer.writers.add(out);
-
-
-            for (String elem : ChatServer.onlineUsers) {
-                if(elem!=null){
-                    out.print(elem + ": is online, ");
-                }
-
-            }
-            out.println();
-            ChatServer.onlineUsers.add(userName);
+            userInitialization();
+//            out.println("Tell As Your Name");
+//            userName = in.readLine();
+//
+//            for (PrintWriter writer : ChatServer.writers) {
+//                if(writer!=null){
+//                    writer.println(userName + ": is online ");
+//                }
+//            }
+//            ChatServer.writers.add(out);
+//
+//
+//            ChatServer.onlineUsers.stream().filter(elem -> elem != null).forEach(elem -> {
+//                out.print(elem + ": is online, ");
+//            });
+//            out.println();
+//            ChatServer.onlineUsers.add(userName);
 
 
             while (true) {
@@ -104,18 +101,7 @@ public class UserOnServer extends Thread {
         } catch (Exception e) {
             System.out.println(e);
         }
-        finally {
-            if (userName != null) {
-                ChatServer.onlineUsers.remove(userName);
-            }
-            if (out != null) {
-                ChatServer.writers.remove(out);
-            }
-            try {
-                socket.close();
-            } catch (IOException e) {
-            }
-        }
+
     }
 
 }
